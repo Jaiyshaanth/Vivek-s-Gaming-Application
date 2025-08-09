@@ -61,7 +61,7 @@ pipeline {
             steps {
                script {
                    withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                            sh "docker build -t vm2322/gaming:latest ."
+                            sh "docker build -t jaiyshaanth/gaming:latest ."
                     }
                }
             }
@@ -69,13 +69,13 @@ pipeline {
     
              stage('IMAGE SCANNING') {
             steps {
-                sh "trivy image --format table -o trivy-image-report.html vm2322/gaming:latest "
+                sh "trivy image --format table -o trivy-image-report.html jaiyshaanth/gaming:latest "
             }
         }   
             
         stage('DOCKER DEPLOYMENT') {
             steps {
-                sh "docker run -d -p 8090:8080 vm2322/gaming:latest"
+                sh "docker run -d -p 8070:8080 jaiyshaanth/gaming:latest"
             }
         }   
     }
